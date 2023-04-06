@@ -1,0 +1,22 @@
+{
+  "name": "mirai",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node src/main.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.5.0",
+    "typescript": "^5.0.3"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "revolt.js": "^6.0.20"
+  }
+}
