@@ -1,8 +1,8 @@
-import { PrefixBuilder } from '../classes/builder';
+import { Command } from '../classes/builder';
 import { Data } from '../typings/index';
 
 export const body = {
-    data: new PrefixBuilder()
+    data: new Command()
         .setName('avatar')
         .setDescription('Devuelve el avatar del usuario'),
     async code(d: Data) {

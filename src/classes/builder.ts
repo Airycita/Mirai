@@ -1,4 +1,4 @@
-export class PrefixBuilder {
+export class Command {
     public name: string;
     public description: string;
     constructor () {
