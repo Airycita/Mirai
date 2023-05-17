@@ -1,0 +1,33 @@
+export type Brackets = 1 | 2;
+
+export interface ParserOptions {
+    brackets?: Brackets,
+    separator?: string,
+    ignore?: string[],
+    allowEmbeds?: boolean
+}
+
+export interface FunctionStructure {
+    name: string,
+    regexp: RegExpMatchArray | null,
+    inside: string,
+    itself: string,
+    splits: string[]
+}
+
+export interface MessageObject {
+    embeds: any[]
+    content: any,
+    allowedMentions?: any,
+    files?: any
+}
+
+export interface BasicFunction {
+    name: string,
+    code: (text: string, data: FunctionStructure) => string
+}
+
+export interface EmbedFunction {
+    name: string,
+    code: (object: MessageObject, data: FunctionStructure, embed: EmbedBuilder) => MessageObject
+}
