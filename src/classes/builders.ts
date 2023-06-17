@@ -68,7 +68,12 @@ export class CommandBuilder {
         return this;
     }
 
-    addParameter(param: CallableFunction) {
+    /**
+     * Add parameters to the command.
+     * @param param Function callback.
+     * @returns 
+     */
+    addParameters(param: CallableFunction) {
         const parameter = param(new Parameter(this));
         return this;
     }
@@ -91,6 +96,10 @@ class Parameter {
         this.index++;
     }
 
+    /**
+     * Adds a subcommand to the main command.
+     * @param config Command body.
+     */
     addSubCommand(config: Command) {
         config.data.type = "subcommand";
         this.command.subcommands.push(config);
