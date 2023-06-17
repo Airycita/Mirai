@@ -1,5 +1,5 @@
 import { SendableEmbed } from "revolt-api";
-import { MakedParameter } from "typings";
+import { Command, MakedParameter } from "typings";
 
 export class EventBuilder {
     name = "message";
@@ -38,7 +38,8 @@ export class CommandBuilder {
     name = "";
     description = "";
     params: MakedParameter[] = [];
-    subcommands = [];
+    subcommands: Command[] = [];
+    type = "command";
 
     /**
      * Set the event name.
@@ -80,10 +81,19 @@ class Parameter {
         this.command = command;
         this.index = 0;
     }
+
+    /**
+     * Adds a string parameter.
+     */
     addStringOption(options: { name: string, description: string, required: boolean }) {
         const { name, description, required } = options;
         this.command.params.push({ name, description, required, type: "string", index: this.index });
         this.index++;
+    }
+
+    addSubCommand(config: Command) {
+        config.data.type = "subcommand";
+        this.command.subcommands.push(config);
     }
 }
 

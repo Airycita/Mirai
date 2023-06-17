@@ -18,7 +18,7 @@ export interface Event {
 
 export interface Command {
     data: CommandBuilder,
-    code(...args): void
+    code?(...args): void
 }
 
 export interface Data {
