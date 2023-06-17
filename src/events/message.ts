@@ -1,8 +1,9 @@
-import { Message } from "revolt.js";
+import { Channel, Message } from "revolt.js";
 import { EventBuilder } from "../classes/builders";
 import { Mirai } from "../classes/mirai";
 import { Event } from "typings";
 import { Group } from "../classes/group";
+import { MissingRequiredParameter } from "../classes/errors";
 
 export const data: Event = {
     data: new EventBuilder().setName("message"),
@@ -15,16 +16,17 @@ export const data: Event = {
             command = client.commands.get(command_name),
             params = new Group<string, unknown>();
         if (!command) return;
-        if (command.data.owner && client._options?.owners?.every((id: string) => id != message.author_id)) return;
-        if (command.data.subcommands.length === 0 && command.data.params.length === 0) command.code({ client, message, args, params });
-        else if (command.data.subcommands.length > 0 && command.data.params.length > 0) return;
-        else if (command.data.params.length) {
-            for (let i = 0; i < command.data.params.length; i++) {
-                const param = command.data.params.at(i);
+        const { data } = command;
+        if (data.owner && client._options?.owners?.every((id: string) => id != message.author_id)) return;
+        if (data.subcommands.length === 0 && data.params.length === 0) command.code({ client, message, args, params });
+        else if (data.subcommands.length > 0 && data.params.length > 0) return;
+        else if (data.params.length > 0) {
+            for (let i = 0; i < data.params.length; i++) {
+                const param = data.params.at(i);
                 if (param.required && !args.at(i)) {
-                    await message.channel?.sendMessage("Parámetro requerido faltante: " + param.name);
+                    client.emit("commandError", new MissingRequiredParameter(command.data, param, message.channel as Channel));
                     return;
-                } else params.set(param.name, command.data.params.length === 1 ? args.join(" ") : args.at(i));
+                } else params.set(param.name, data.params.length === 1 ? args.join(" ") : args.at(i));
             }
             command.code({ client, message, args, params });
         }

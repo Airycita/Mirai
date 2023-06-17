@@ -3,6 +3,7 @@ import { KeyValueDatabaseOption } from "aoi.db";
 import { Message } from "revolt.js";
 import { CommandBuilder, EventBuilder } from "src/classes/builders";
 import { Group } from "src/classes/group";
+import { MissingRequiredParameter } from "src/classes/errors";
 
 export interface MiraiOptions {
     database?: KeyValueDatabaseOption,
@@ -34,3 +35,5 @@ export interface MakedParameter {
     index: number,
     type: "string" | "boolean" | "number" | "user" | "member"
 }
+
+export type AnyError = MissingRequiredParameter;
