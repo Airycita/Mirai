@@ -4,15 +4,23 @@
   "description": "Un bot para revolt.chat en español.",
   "main": "dist/main.js",
   "scripts": {
-    "compile": "tsc -p tsconfig.json && util/minifier.ts",
+    "compile": "tsc -p tsconfig.json && ts-node utils/minifier.ts",
     "test": "ts-node src/main.ts",
-    "run": "node dist"
+    "start": "node dist/main.js"
   },
-  "keywords": [],
+  "keywords": [
+    "bot",
+    "revolt.chat",
+    "español",
+    "spanish"
+  ],
   "author": "Erisa",
   "license": "UNIRO",
   "dependencies": {
-    "revolt.js": "6.0.20-patch.2"
+    "aoi.db": "1.1.1",
+    "dotenv": "^16.3.1",
+    "revolt.js": "6.0.20-patch.2",
+    "tslib": "^2.5.3"
   },
   "devDependencies": {
     "@types/node": "^20.3.1",
