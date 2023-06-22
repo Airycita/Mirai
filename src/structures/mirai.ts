@@ -1,10 +1,12 @@
-import { Client } from 'revolt.js';
-import { BaseModule, MiraiOptions } from '@types';
 import { CommandManager, EventManager } from './managers';
+import { BaseModule, MiraiOptions } from '@types';
 import { EventBuilder } from './builders';
+import { Client } from 'revolt.js';
+import { KeyValue as Database } from 'aoi.db';
 
 export class Mirai {
     commands: CommandManager = new CommandManager();
+    database: Database | null = null;
     events: EventManager = new EventManager();
     itself: Client = new Client();
     _options: MiraiOptions | null = null;
@@ -15,12 +17,14 @@ export class Mirai {
      */
     assign(options: MiraiOptions) {
         this._options = options
+        this.database = new Database(this._options.database ?? {});
     }
 
     /**
      * Login into the mirai client.
      */
     login() {
+        this.database?.on("ready", () => console.log("Database connected!"));
         this.itself.loginBot(`${this._options?.token}`);
     }
 

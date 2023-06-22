@@ -15,6 +15,6 @@ mirai.assign({
 mirai.commands.load('./src/commands');
 mirai.events.load(mirai, './src/events');
 
-mirai.itself.on("ready", () => console.log(mirai.itself.user?.username));
+mirai.itself.on("ready", () => {console.log(mirai.itself.user?.username); mirai.database?.connect(); });
 
 mirai.login();

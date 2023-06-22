@@ -31,13 +31,8 @@ export const data: BaseModule<CommandBuilder> = {
         .addSubCommand({
             data: new CommandBuilder()
                 .setName("ping")
-                .setDescription("¡Revisa la latencia de mi websocket!")
-                .appendParameters(callback => callback
-                    .addNumberOption({ name: "numero", description: "...", required: true })
-                    .addStringOption({ name: "msg", description: "...", required: false })
-                ),
+                .setDescription("¡Revisa la latencia de mi websocket!"),
             async code({ message, params }: Data) {
-                console.log(params);
                 await message.channel?.sendMessage({
                     embeds: [{
                         title: "Latencia",
