@@ -114,6 +114,24 @@ class Parameter {
         this.command.params.push({ name, description, required, type: "user", index: this.index });
         this.index++;
     }
+
+    addChannelOption(options: { name: string, description: string, required: boolean }) {
+        const { name, description, required } = options;
+        this.command.params.push({ name, description, required, type: "channel", index: this.index });
+        this.index++;
+    }
+
+    addNumberOption(options: { name: string, description: string, required: boolean }) {
+        const { name, description, required } = options;
+        this.command.params.push({ name, description, required, type: "number", index: this.index });
+        this.index++;
+    }
+
+    addBooleanOption(options: { name: string, description: string, required: boolean }) {
+        const { name, description, required } = options;
+        this.command.params.push({ name, description, required, type: "boolean", index: this.index });
+        this.index++;
+    }
 }
 
 export class EmbedBuilder {
