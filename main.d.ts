@@ -1,6 +1,7 @@
 import { KeyValueDatabaseOption } from 'aoi.db';
 import { CommandBuilder, EventBuilder } from './src/structures/builders';
 import { Message } from 'revolt.js';
+import { Group } from 'src/structures/group';
 
 export interface MiraiOptions {
     database?: KeyValueDatabaseOption,
@@ -29,5 +30,6 @@ export interface ParameterData {
 
 export interface Data {
     message: Message,
-    args: string[]
+    args: string[],
+    params: Group<string, MakedParameter>
 }

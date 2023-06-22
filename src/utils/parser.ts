@@ -32,6 +32,11 @@ export class CommandParser {
         const new_params = parameters.toArray<MakedParameter>();
         for (let i = 0; i <= new_params.length; i++) {
             const param = new_params.at(i);
+            if (param?.required && !(args.at(i))) {
+                d.error.status = true
+                d.error.data = new Errors.MissingRequiredParam(channel, param);
+                break;
+            }
             switch(param?.type) {
                 case "boolean":
                     if (!(["true", "yes", "si", "1"].includes(`${args.at(i)}`)) && !(["false", "no", "0"].includes(`${args.at(i)}`))) {
@@ -68,7 +73,8 @@ export class CommandParser {
                     param_cacher.set(param.name, user);
                     break;
                 default:
-                    param_cacher.set(param?.name, i < new_params.length ? args.slice(i, new_params.length) : args.at(i));
+                    if (args.at(i) && new_params.length > i) param_cacher.set(param?.name, args.slice(i).join(" "));
+                    else if (args.at(i) && i < new_params.length) param_cacher.set(param?.name, args.at(i));
                     break;
             }
             if (d.error.status) break;
