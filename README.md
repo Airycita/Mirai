@@ -7,22 +7,13 @@ Mirai se creó con la idea de ser un proyecto de código abierto, escrito en su 
 ## Contents
 <!-- AUTO-GENERATED-CONTENT:START (TOC:collapse=true&collapseText="Click to expand") -->
 <details>
-<summary>"Click to expand"</summary>
+<summary>"Click para expandir"</summary>
 
 - [Características](#caracteristicas)
-- [Markdown basics](#markdown-basics)
-- [Advanced Formatting tips](#advanced-formatting-tips)
-  - [`left` alignment](#left-alignment)
-  - [`right` alignment](#right-alignment)
-  - [`center` alignment example](#center-alignment-example)
-  - [`collapse` Sections](#collapse-sections)
-  - [`additional links`](#additional-links)
-  - [Badges](#badges)
-- [Useful packages](#useful-packages)
-- [Useful utilities](#useful-utilities)
-- [How Serverless uses markdown](#how-serverless-uses-markdown)
-  - [DEMO](#demo)
-- [Other Markdown Resources](#other-markdown-resources)
+- [Util](#utils)
+  - [Estructura del bot](#estructura-del-bot)
+  - [Creación de comandos](#creacion-de-comandos)
+  - [Creación de subcomandos](#creacion-de-subcomandos)
 
 </details>
 <!-- AUTO-GENERATED-CONTENT:END -->
@@ -36,7 +27,8 @@ Mirai se creó con la idea de ser un proyecto de código abierto, escrito en su 
 - Framework destinado a la facilitación de creación de bots.
 ---
 
-## Estructura del bot
+## Utils
+### Estructura del bot
 ```graphql
 - 📄 .ENV
 - 📄 .gitignore
@@ -55,7 +47,46 @@ Mirai se creó con la idea de ser un proyecto de código abierto, escrito en su 
     | - 📄 main.ts
 ```
 
+### Creación de comandos
+Es necesario importar la clase `CommandBuilder`.
+```ts
+import { CommandBuilder, Data } from "main";
+
+export const data = {
+    data: new CommandBuilder()
+        .setName("ping")
+        .setDescription("¡Regresa mi latencia!"),
+    code: async (d: Data) => {
+        // ...coding here.
+    }
+}
+```
+
+### Creación de subcomandos
+Siguiendo el ejemplo anterior, sólo usamos el método `addSubCommand` de la clase `CommandBuilder`.
+Es necesario importar la clase `CommandBuilder`.
+```ts
+import { CommandBuilder, Data } from "main";
+
+export const data = {
+    data: new CommandBuilder()
+        .setName("bot")
+        .setDescription("...")
+        .addSubCommand({
+            data: new CommandBuilder()
+                .setName("ping")
+                .setDescription("¡Regresa mi latencia!"),
+            code: async (d: Data) => {
+                    // ...coding here.
+            }
+        })
+}
+```
 ---
 
 ## LICENSING
 Este proyecto utiliza la licencia UNIRO (Universal Read-Only Code), asegúrate de leerlo para no tener problemas.
+
+## Dependencias principales
+- [Revolt.js](https://npmjs.com/revolt.js)
+- [TypeScript](https://npmjs.com/typescript)
