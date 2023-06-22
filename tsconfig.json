@@ -5,6 +5,8 @@
         "rootDir": "./src/",
         "outDir": "./dist/",
         "strict": true,
+        "declaration": true,
+        "composite": true,
         "moduleResolution": "node",
         "importHelpers": true,
         "experimentalDecorators": true,
@@ -13,23 +15,26 @@
         "allowSyntheticDefaultImports": true,
         "resolveJsonModule": true,
         "forceConsistentCasingInFileNames": true,
-        "removeComments": true,
-        "noImplicitAny": false,
+        "removeComments": false,
         "typeRoots": [
             "node_modules/@types",
-            "typings.d.ts"
+            "main.d.ts"
         ],
         "sourceMap": false,
-        "baseUrl": "./"
+        "baseUrl": "./",
+        "paths": {
+            "main": ["src/main", "dist/main"],
+            "@types": ["main"]
+        }
     },
     "files": [
         "src/main.ts"
     ],
     "include": [
-        "./**/**/*.ts",
+        "./**/**/*.ts"
     ],
     "exclude": [
         "node_modules",
         "dist"
-    ],
-}
+    ]
+  }
