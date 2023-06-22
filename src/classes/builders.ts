@@ -94,6 +94,7 @@ class Parameter {
         const { name, description, required } = options;
         this.command.params.push({ name, description, required, type: "string", index: this.index });
         this.index++;
+        return this;
     }
 
     /**
@@ -103,6 +104,7 @@ class Parameter {
     addSubCommand(config: Command) {
         config.data.type = "subcommand";
         this.command.subcommands.push(config);
+        return this;
     }
 
     /**
@@ -113,24 +115,40 @@ class Parameter {
         const { name, description, required } = options;
         this.command.params.push({ name, description, required, type: "user", index: this.index });
         this.index++;
+        return this;
     }
 
+    /**
+     * Add a channel option to the command.
+     * @param options Options object.
+     */
     addChannelOption(options: { name: string, description: string, required: boolean }) {
         const { name, description, required } = options;
         this.command.params.push({ name, description, required, type: "channel", index: this.index });
         this.index++;
+        return this;
     }
 
+    /**
+     * Add a number option to the command.
+     * @param options Options object.
+     */
     addNumberOption(options: { name: string, description: string, required: boolean }) {
         const { name, description, required } = options;
         this.command.params.push({ name, description, required, type: "number", index: this.index });
         this.index++;
+        return this;
     }
 
+    /**
+     * Add a boolean option to the command.
+     * @param options Options object.
+     */
     addBooleanOption(options: { name: string, description: string, required: boolean }) {
         const { name, description, required } = options;
         this.command.params.push({ name, description, required, type: "boolean", index: this.index });
         this.index++;
+        return this;
     }
 }
 
