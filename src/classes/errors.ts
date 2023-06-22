@@ -12,3 +12,39 @@ export class MissingRequiredParameter {
         this.param = param;
     }
 }
+
+export class InvalidUserParam {
+    public command: CommandBuilder;
+    public param: MakedParameter;
+    constructor(command: CommandBuilder, param: MakedParameter) {
+        this.command = command;
+        this.param = param;
+    }
+}
+
+export class InvalidNumberParam {
+    public command: CommandBuilder;
+    public param: MakedParameter;
+    constructor(command: CommandBuilder, param: MakedParameter) {
+        this.command = command;
+        this.param = param;
+    }
+}
+
+export class InvalidChannelParam {
+    public command: CommandBuilder;
+    public param: MakedParameter;
+    constructor(command: CommandBuilder, param: MakedParameter) {
+        this.command = command;
+        this.param = param;
+    }
+}
+
+export class InvalidBooleanParam {
+    public command: CommandBuilder;
+    public param: MakedParameter;
+    constructor(command: CommandBuilder, param: MakedParameter) {
+        this.command = command;
+        this.param = param;
+    }
+}

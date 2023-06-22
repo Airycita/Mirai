@@ -104,6 +104,16 @@ class Parameter {
         config.data.type = "subcommand";
         this.command.subcommands.push(config);
     }
+
+    /**
+     * Add a user option to the command.
+     * @param options Options object.
+     */
+    addUserOption(options: { name: string, description: string, required: boolean }) {
+        const { name, description, required } = options;
+        this.command.params.push({ name, description, required, type: "user", index: this.index });
+        this.index++;
+    }
 }
 
 export class EmbedBuilder {
