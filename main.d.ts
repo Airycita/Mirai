@@ -29,6 +29,7 @@ export interface ParameterData {
 }
 
 export interface Data {
+    bot: Mirai,
     message: Message,
     args: string[],
     params: Group<string, MakedParameter>

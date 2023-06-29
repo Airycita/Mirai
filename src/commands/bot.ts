@@ -32,7 +32,7 @@ export const data: BaseModule<CommandBuilder> = {
             data: new CommandBuilder()
                 .setName("ping")
                 .setDescription("¡Revisa la latencia de mi websocket!"),
-            async code({ message, params }: Data) {
+            async code({ message }: Data) {
                 await message.channel?.sendMessage({
                     embeds: [{
                         title: "Latencia",
@@ -40,6 +40,34 @@ export const data: BaseModule<CommandBuilder> = {
                         colour: "FFFFFF"
                     }]
                 })
+            }
+        })
+        .addSubCommand({
+            data: new CommandBuilder()
+                .setName("test")
+                .setDescription("Testea el custom script que desees.")
+                .appendParameters(param => param
+                    .addStringOption({
+                        name: "texto",
+                        description: "El mensaje a testear.",
+                        required: true 
+                    })
+                ),
+            async code({ bot, message, params }: Data) {
+                const text = params.get("texto");
+                try {
+                    const data = bot.parsers.embed.parse(text);
+                    await message.channel?.sendMessage(data);
+                } catch {
+                    await message.channel?.sendMessage({
+                        embeds: [{
+                            title: "¡Uh-oh, algo salió mal!",
+                            description: "Probablemente algún parámetro está mal o el mensaje está vacío.",
+                            colour: "FFFFFF"
+                        }]
+                    })
+                }
+                
             }
         })
 }

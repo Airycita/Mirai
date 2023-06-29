@@ -20,6 +20,6 @@ export const data: BaseModule<EventBuilder> = {
         if (!found) return;
         if (found.error.status === true) { bot.itself.emit("commandError", found.error.data); return; }
         args = found.args
-        found.command.code?.({ args, message, params })
+        found.command.code?.({ args, bot, message, params })
     }
 }

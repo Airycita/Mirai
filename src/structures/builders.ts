@@ -1,4 +1,5 @@
 import { BaseModule, MakedParameter, ParameterData } from "@types";
+import { SendableEmbed } from "revolt-api";
 import { Group } from "./group";
 
 export class CommandBuilder {
@@ -124,5 +125,59 @@ class Parameter {
     addUserOption(options: ParameterData) {
         this.command.parameters.set(options.name, { ...options, index: this._idx, type: "user" });
         return this;
+    }
+}
+
+export class EmbedBuilder {
+    /**
+     * Class taken from "revolt.io"
+     * https://github.com/revolt-io/revolt.io/blob/stable/src/structures/MessageEmbed.ts
+     */
+    #url?: string;
+    #title?: string;
+    #description?: string;
+    #icon_url?: string;
+    #color?: string;
+    #media?: string;
+
+    setTitle(title: string): this {
+        this.#title = title;
+        return this;
+    }
+
+    setIcon(iconURL: string): this {
+        this.#icon_url = iconURL;
+        return this;
+    }
+
+    setColor(color: string): this {
+        this.#color = color;
+        return this;
+    }
+
+    setDescription(description: string): this {
+        this.#description = description;
+        return this;
+    }
+
+    setURL(url: string): this {
+        this.#url = url;
+        return this;
+    }
+
+    setMedia(media: string): this {
+        this.#media = media;
+        return this;
+    }
+
+    toJSON(): SendableEmbed {
+        return {
+            title: this.#title,
+            description: this.#description,
+            url: this.#url,
+            icon_url: this.#icon_url,
+            colour: this.#color,
+            media: this.#media,
+        };
     }
 }
